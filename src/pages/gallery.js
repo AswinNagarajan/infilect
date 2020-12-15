@@ -10,10 +10,7 @@ const Gallery = () =>{
   const [pageNumber , setPageNumber] = useState(1)
   const cardsAccess = useRef()
 
-  // useEffect(()=>{
-  //   setRes([])
-  // },[query])
-
+/*Infinite scrolling*/
   const infiniteScrolling = useCallback(node=>{
     if(cardsAccess.current){
       cardsAccess.current.disconnect()
@@ -32,26 +29,18 @@ const Gallery = () =>{
     }
   },[])
 
-
+/*API call whenever the user queries the page*/
   const axiosCall = (query , pageNumber) =>{
 
     const abc = Axios.get(" https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=4c2a150dc5785ce875106ab979a77b7e&tags="+query+"&format=json&nojsoncallback=1&page="+pageNumber+"&per_page="+20+"")
     .then(
       response =>{
-//        console.log(response)
-        return response
-      }
-    )
-    .then(
-      response =>{
         const images =
         response.data.photos.photo.map( item =>{
           let src = "https://farm"+item.farm+".staticflickr.com/"+item.server+"/"+item.id+"_"+item.secret+".jpg"
-          // return <img alt="error" className = "grid-item" src={src} />
           return src
         })
 
-//        console.log(images)
 
 
         return [response.data.photos.photo.map( item =>{
@@ -84,10 +73,9 @@ const Gallery = () =>{
 
 
 
-
+/*This function gets called whenever the user queries the page*/
   const handleRequest = (e) =>{
     setQuery(e.target.value)
-//    console.log(query)
     setPageNumber(1)
   }
 

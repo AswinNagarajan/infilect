@@ -4,7 +4,7 @@ import {Chart} from 'chart.js'
 
 const ChartPhotos = (props) =>{
 
-
+/*Chart using chart.js library . The function will run after we get the necessary data -> (Group Name , Members in Group)*/
 useEffect(()=>{
   var ctx = document.getElementById('myChart').getContext('2d');
   var myBarChart = new Chart(ctx, {

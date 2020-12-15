@@ -2,7 +2,7 @@ import React , {useState} from 'react'
 
 
 const SearchImage = (props) =>{
-
+/*Bootstrap is used for the text fields . When user types render props functionality gets run*/
   return(
     <>
 

@@ -14,17 +14,14 @@ const Group = () =>{
   const [pageNumber , setPageNumber] = useState(1)
   const cardsAccess = useRef()
 
-  // useEffect(()=>{
-  //   setRes([])
-  // },[query])
 
+/*Infinite scrolling*/
   const infiniteScrolling = useCallback(node=>{
     if(cardsAccess.current){
       cardsAccess.current.disconnect()
     }
     cardsAccess.current = new IntersectionObserver( entry =>{
       if(entry[0].isIntersecting){
-  //      console.log(entry)
         setPageNumber(prevPage =>{
           return prevPage+1
         })
@@ -35,16 +32,10 @@ const Group = () =>{
     }
   },[])
 
-
+/*API call whenever the user queries the page*/
   const axiosCall = (query , pageNumber) =>{
     debugger;
     const abc = Axios.get(" https://www.flickr.com/services/rest/?method=flickr.groups.search&api_key=4c2a150dc5785ce875106ab979a77b7e&text="+query+"&page="+pageNumber+"&per_page=20&format=json&nojsoncallback=1")
-    .then(
-      response =>{
-  //       console.log(response)
-        return response
-      }
-    )
     .then(
       response =>{
 
@@ -72,7 +63,7 @@ useEffect(() => {
   axiosCall(query , pageNumber)
 }, [query,pageNumber])
 
-
+/*This function gets called whenever the user queries the page*/
   const handleRequest = (e) =>{
     setQuery(e.target.value)
     setPageNumber(1)

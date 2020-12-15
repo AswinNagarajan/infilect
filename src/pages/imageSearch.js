@@ -5,6 +5,7 @@ import Gallery from './gallery.js'
 
 
 const ImageSearch = () =>{
+/*Routes have been added for the pages Gallery and Group*/
   return(
     <>
     <BrowserRouter>
